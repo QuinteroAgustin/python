@@ -97,7 +97,7 @@ def main() :
 		lignes = file.readlines()
 		totalLigne = 0
 		for ligne in lignes:
-			etudiant = ligne.split(typeSeparateur)
+			etudiant = str(ligne).split(typeSeparateur)
 			dico[totalLigne+1] = etudiant
 			totalLigne += 1
 		print("Creation d'un dictionnaire a partir du fichier '{}' avec {} entrees".format(fileName, totalLigne))
@@ -116,7 +116,7 @@ def main() :
 
 	print("nom du nouvel identifiant de compte de {} {}:{}".format('Mary', 'Smith', nomCompte))
 
-###### exercice 11
+	###### exercice 11
 	print("exercice 11 #######################")
 	def makeUserVar(prenom, nom, n):
 		if(int(n)> 4):
@@ -135,9 +135,19 @@ def main() :
 	print("nom du nouvel identifiant de compte de {} {} avec {} lettres:{}".format('Mary', 'Smith', 5, nomCompte))
 
 	
-###### exercice 12
+	###### exercice 12
 	print("exercice 12 #######################")
-		
+	
+	def makeUserScript(uneClasse):
+		for k,v in uneClasse.items():
+			prenom = v[1]
+			nom = v[0]
+			parent = v[6]
+			user = makeUserVar(prenom, nom, 3)
+			print("{}, {}, {}, {}".format(prenom, nom, parent, user))
+		return 0
+	
+	print(makeUserScript(makeStudentClass('liste_etudiants_admin_sys.csv', ';')))
 
 if __name__=="__main__":
 	print("main()")
