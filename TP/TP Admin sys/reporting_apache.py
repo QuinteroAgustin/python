@@ -3,7 +3,10 @@ import sys
 # fonctions
 def makeLineDir(listeLigne):
 	dico = {}
-	
+	log = listeLigne.split()
+	dico["remote_host"] = log[0]
+	dico["status"] = log[8]
+	dico["bytes_sent"] = log[9]
 	return dico
 	
 def traitementFichier(f):
@@ -13,18 +16,19 @@ def traitementFichier(f):
 	# lire le fichier
 	dicResume = {}
 	for ligne in lignes:
-#
-#
-#
-#
-#
-#
-	print ("regroupement")
-	print (dicResume)
+		ligne = makeLineDir(ligne)
+		print(ligne)
+		# Vérifie si la clé existe déjà dans le dictionnaire
+		if(dicResume.get(ligne['remote_host'])):
+			# Ajoute la valeur à la liste existante
+			dicResume[ligne['remote_host']].append(ligne['bytes_sent'])
+		else:
+			# Crée une nouvelle liste pour cette clé
+			dicResume[ligne['remote_host']] = [ligne['bytes_sent']]
 
-	
+	print("regroupement")
 
-	
+	print(dicResume)
 
 # programme principal
 
