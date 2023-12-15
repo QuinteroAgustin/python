@@ -13,10 +13,10 @@ class Voiture:
     def choix_conducteur(self, nom):
         self.pilote = nom
 
-    def accelerer(self, taux, duree):
+    def accelerer(self, taux = 0, duree = 0):
         
         if(self.pilote == 'personne'):
-            print("Cette voiture n'as pas de conducteur !")
+            print("Cette voiture n'a pas de conducteur !")
             self.vitesse = 0
         else:
             self.vitesse = taux*duree
