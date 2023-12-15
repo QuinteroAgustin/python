@@ -35,31 +35,44 @@ def main() :
 	tabRepName = ['cdrom','lib64','root','srv','mnt','snap','lost+found','tmp','run','sbin','bin','home','boot','opt','etc','swapfile','lib','var','media','usr']
 	tabRepSize = [4,4,4,4,8,8,16,76,2692,15416,15872,99992,108272,116300,191872,385840,616360,647768,1308416,3357908]
 
-	reps = {}
+	reps = {} #on initialise le dico
 	for i in range(len(tabRepName)):
-		reps[tabRepName[i]] = tabRepSize[i]
+		reps[tabRepName[i]] = tabRepSize[i] #on remplie le dico, avec taprepname en cle et size en value avec l'indice I 
 	
 	print("{}".format(reps))
 	
 	###### exercice 04
 	print("exercice 04 #######################")
-	
-	
-
+	for i in range(len(reps)): # on fait une boucle du nombre d'élément dans le dictionnaire
+		cle = list(reps.keys()) # on créer deux tableau séparé pour qu'ils soit indépendant
+		valeur = list(reps.values())
+		print("dossier {} : taille = {}".format(cle[i], valeur[i])) # on les affiche
 
 	###### exercice 05
 	print("exercice 05 #######################")
 	
+	#on partour le dico avec la key et la value, mais dans la meme boucle en prenant l'objet du dico en cours
+	for k,v in reps.items():
+		if v < 100000 and v > 10000: # on vérifie si la valeur est bien présente dans la condition sinon on n'affiche riens
+			print("dossier {} : taille = {}".format(k,v))
 
 
 	###### exercice 06
 	print("exercice 06 #######################")
 
-	
+	tabSize = [] # on initialise un tableau vide
+	for k,v in reps.items():#on boucle dans le dico
+		tabSize.append(v)
+	print("affichage de 'tabSize' :\n{}".format(tabSize))
+
 	###### exercice 07
 	print("exercice 07 #######################")
 
-	
+	def totalSize(tableau):
+		total = 0
+		for i in tableau:#on parcour le tableau, avec i l'élément du tableau
+			total = total+i#on aditionne l'élément avec le reste du tableau
+		return total #on renvoie le tableau
 
 	
 	###### exercice 08
