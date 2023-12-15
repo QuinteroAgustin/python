@@ -79,12 +79,12 @@ def main() :
 	
 	###### exercice 08
 	print("exercice 08 #######################")
-	fileName = "liste_etudiants_admin_sys.csv"
-	file = open(fileName, 'r')
+	fileName = "liste_etudiants_admin_sys.csv" #nom du fichier par défault
+	file = open(fileName, 'r') #on ouvre le fichier en lecture
 	lignes = file.readlines()
 	totalLigne = 0
-	for ligne in lignes:
-		print("{}".format(ligne))
+	for ligne in lignes: #on parcour les lignes
+		print("{}".format(ligne)) #on affiche chaque ligne
 		totalLigne += 1
 	print("le fichier contient {} lignes".format(totalLigne))
 			
@@ -93,13 +93,13 @@ def main() :
 	
 	def makeStudentClass(fileName, typeSeparateur = ";"):
 		dico = {}
-		file = open(fileName, 'r')
-		lignes = file.readlines()
+		file = open(fileName, 'r') # on ouvre le fichier en lecture
+		lignes = file.readlines() #on lis les lignes du documents
 		totalLigne = 0
 		for ligne in lignes:
-			etudiant = str(ligne).split(typeSeparateur)
-			dico[totalLigne+1] = etudiant
-			totalLigne += 1
+			etudiant = str(ligne.replace('"', '')).split(typeSeparateur) #on fait un replace car il faut supprimer les " du tableau d'origine pour éviter d'avoir '"nom"'
+			dico[totalLigne+1] = etudiant # on ajoute la ligne dans le dico
+			totalLigne += 1 #on incrémente le compteur de ligne
 		print("Creation d'un dictionnaire a partir du fichier '{}' avec {} entrees".format(fileName, totalLigne))
 		return dico
 	
@@ -108,7 +108,7 @@ def main() :
 	###### exercice 10
 	print("exercice 10 #######################")
 	def makeUser(prenom, nom):
-		prenom2 = prenom[:2]
+		prenom2 = prenom[:2]#on ne récupere que les 2 premier char du tableau de 0 a 1 car le 2 est exclu
 		nom2 = nom[:2]
 		user = str(prenom2)+str(nom2)
 		return user
@@ -119,14 +119,16 @@ def main() :
 	###### exercice 11
 	print("exercice 11 #######################")
 	def makeUserVar(prenom, nom, n):
-		if(int(n)> 4):
+		if(int(n)> 4):# si la taille est supp a 4 on affiche une erreur et on renvoir false
 			print("ERREUR taille demandée trop longue !!!")
 			return False
-		else:
-			prenom2 = prenom[:int(n)]
+		else:#sinon on fait le traitement normal
+			prenom2 = prenom[:int(n)]#int pour forcer a que n soit un entier
 			nom2 = nom[:int(n)]
 			user = str(prenom2)+str(nom2)
 			return user
+		
+	#On affiche les résultats
 	nomCompte = makeUserVar('Mary','Smith', 3)
 	print("nom du nouvel identifiant de compte de {} {} avec {} lettres:{}".format('Mary', 'Smith', 3, nomCompte))
 	nomCompte = makeUserVar('Mary','Smith', 4)
@@ -139,13 +141,19 @@ def main() :
 	print("exercice 12 #######################")
 	
 	def makeUserScript(uneClasse):
+		fileName = "ExportUser.txt"
+		file = open(fileName, 'w')
 		for k,v in uneClasse.items():
 			prenom = v[1]
 			nom = v[0]
 			parent = v[6]
-			user = makeUserVar(prenom, nom, 3)
-			print("{}, {}, {}, {}".format(prenom, nom, parent, user))
-		return 0
+			user = makeUserVar(prenom, nom, 3) # on créer le no md'utilisateur de l'éléve
+			pwd = makeUserVar(parent, nom, 3) #on créer le mot de passe avec l'email du parent et le nom de l'éléve
+			adduser = "useradd -m -p {} {}; chage -d0 {}\n".format(pwd, user, user) # on créer la chaine pour pouvoir l'utiliser plusieurs fois (dans le print et dans l'import du fichier)
+			print("{}".format(adduser.replace('\n', '')))# on supprime le '\n' pour éviter d'avoir un écart entre charque ligne
+			file.write(adduser)#on écrit dans le fichier
+		file.close()#on ferme le fichier
+		return "Nouveau fichier créer : " + fileName # en renvoir le nom du fichier créer 
 	
 	print(makeUserScript(makeStudentClass('liste_etudiants_admin_sys.csv', ';')))
 
