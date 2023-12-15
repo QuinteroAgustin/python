@@ -74,9 +74,19 @@ def main() :
 			total = total+i#on aditionne l'élément avec le reste du tableau
 		return total #on renvoie le tableau
 
+	print("pour le tableau {}".format(tabSize))
+	print("la somme est de {}".format(totalSize(tabSize)))
 	
 	###### exercice 08
 	print("exercice 08 #######################")
+	fileName = "liste_etudiants_admin_sys.csv"
+	file = open(fileName, 'r')
+	lignes = file.readlines()
+	totalLigne = 0
+	for ligne in lignes:
+		print("{}".format(ligne))
+		totalLigne += 1
+	print("le fichier contient {} lignes".format(totalLigne))
 			
 	###### exercice 09
 	print("exercice 09 #######################")
