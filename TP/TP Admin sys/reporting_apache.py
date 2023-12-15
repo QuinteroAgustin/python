@@ -21,10 +21,10 @@ def traitementFichier(f):
 		# Vérifie si la clé existe déjà dans le dictionnaire
 		if(dicResume.get(ligne['remote_host'])):
 			# Ajoute la valeur à la liste existante
-			dicResume[ligne['remote_host']].append(ligne['bytes_sent'])
+			dicResume[ligne['remote_host']].append(int(ligne['bytes_sent']))
 		else:
 			# Crée une nouvelle liste pour cette clé
-			dicResume[ligne['remote_host']] = [ligne['bytes_sent']]
+			dicResume[ligne['remote_host']] = [int(ligne['bytes_sent'])]
 
 	print("regroupement")
 
