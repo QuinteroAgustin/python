@@ -91,12 +91,49 @@ def main() :
 	###### exercice 09
 	print("exercice 09 #######################")
 	
+	def makeStudentClass(fileName, typeSeparateur = ";"):
+		dico = {}
+		file = open(fileName, 'r')
+		lignes = file.readlines()
+		totalLigne = 0
+		for ligne in lignes:
+			etudiant = ligne.split(typeSeparateur)
+			dico[totalLigne+1] = etudiant
+			totalLigne += 1
+		print("Creation d'un dictionnaire a partir du fichier '{}' avec {} entrees".format(fileName, totalLigne))
+		return dico
 	
+	uneClasse = makeStudentClass('liste_etudiants_admin_sys.csv', ';')
+	print(uneClasse)
 	###### exercice 10
 	print("exercice 10 #######################")
-	
+	def makeUser(prenom, nom):
+		prenom2 = prenom[:2]
+		nom2 = nom[:2]
+		user = str(prenom2)+str(nom2)
+		return user
+	nomCompte = makeUser('Mary','Smith')
+
+	print("nom du nouvel identifiant de compte de {} {}:{}".format('Mary', 'Smith', nomCompte))
+
 ###### exercice 11
 	print("exercice 11 #######################")
+	def makeUserVar(prenom, nom, n):
+		if(int(n)> 4):
+			print("ERREUR taille demandée trop longue !!!")
+			return False
+		else:
+			prenom2 = prenom[:int(n)]
+			nom2 = nom[:int(n)]
+			user = str(prenom2)+str(nom2)
+			return user
+	nomCompte = makeUserVar('Mary','Smith', 3)
+	print("nom du nouvel identifiant de compte de {} {} avec {} lettres:{}".format('Mary', 'Smith', 3, nomCompte))
+	nomCompte = makeUserVar('Mary','Smith', 4)
+	print("nom du nouvel identifiant de compte de {} {} avec {} lettres:{}".format('Mary', 'Smith', 4, nomCompte))
+	nomCompte = makeUserVar('Mary','Smith', 5)
+	print("nom du nouvel identifiant de compte de {} {} avec {} lettres:{}".format('Mary', 'Smith', 5, nomCompte))
+
 	
 ###### exercice 12
 	print("exercice 12 #######################")
